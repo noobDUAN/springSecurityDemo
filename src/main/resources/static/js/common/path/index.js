@@ -1,0 +1,1 @@
+var ctx = window.document.location.origin;

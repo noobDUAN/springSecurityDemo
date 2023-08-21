@@ -1,5 +1,7 @@
 #
 spring:
+  mvc:
+    static-path-pattern: /static/**
   application:
     name: springSecurityDemo
   datasource:
@@ -16,3 +18,4 @@ spring:
         format_sql: true
 server:
   port: 8089
+

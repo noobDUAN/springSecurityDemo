@@ -71,7 +71,12 @@
     }
 
     function noteBookView(){
-        window.open(ctx+"/NoteBook/");
+
+        $.ajax({
+            url: ctx+"/NoteBook",
+            type:"GET",
+
+        })
     }
 </script>
 
