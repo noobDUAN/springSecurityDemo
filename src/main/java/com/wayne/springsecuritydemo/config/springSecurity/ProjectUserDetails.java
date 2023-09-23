@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,37 +14,45 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Configuration
-public class MyUserDetailsService implements UserDetailsService{
+public class ProjectUserDetails implements UserDetailsService {
+
+    private List<UserDetails> users;
 
     @Resource
     UserService userService;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserBean userBean = userService.findUserByName(username);
-        if(Objects.isNull(userBean)){
-            throw new UsernameNotFoundException("用户：‘"+username+"'不存在" );
-        }else {
-            List<SimpleGrantedAuthority> simpleGrantedAuthorityList = createAuthorities(userBean.getRole());
-            UserDetails userDetails = new User(userBean.getName(), userBean.getPassword(), simpleGrantedAuthorityList);
-            return userDetails;
+        UserDetails user = users.stream().filter(each -> each.getUsername().equals(username)).findFirst().get();
+
+        if(Objects.isNull(user)){
+            UserBean userBean = userService.findUserByName(username);
+            if (Objects.isNull(userBean)) {
+                throw new UsernameNotFoundException("用户：‘" + username + "'不存在");
+            } else {
+                HashSet<SimpleGrantedAuthority> authorityHashSet = createAuthorities(userBean.getRole());
+                UserDetails newUser = new SecurityUserDetails(userBean.getName(), userBean.getPassword(), authorityHashSet);
+                users.add(newUser);
+                return newUser;
+            }
+        }else{
+            return user;
         }
+
+
     }
 
-    private List<SimpleGrantedAuthority> createAuthorities(String roleStr){
+    private HashSet<SimpleGrantedAuthority> createAuthorities(String roleStr) {
         String[] roles = roleStr.split(",");
-        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+        HashSet<SimpleGrantedAuthority> simpleGrantedAuthorities = new HashSet<>();
         for (String role : roles) {
             simpleGrantedAuthorities.add(new SimpleGrantedAuthority(role));
         }

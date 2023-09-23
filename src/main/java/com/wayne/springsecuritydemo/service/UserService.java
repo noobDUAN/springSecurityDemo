@@ -1,7 +1,6 @@
 package com.wayne.springsecuritydemo.service;
 
 import com.wayne.springsecuritydemo.entity.UserBean;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
