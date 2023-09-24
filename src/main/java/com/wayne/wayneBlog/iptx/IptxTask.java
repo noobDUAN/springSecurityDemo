@@ -14,7 +14,7 @@ public class IptxTask {
     @Autowired
     MessageSocket messageSocket;
 
-    @Scheduled(cron = "*/3 * * * * *")
+    @Scheduled(cron = "* * */3 * * *")
     public void doSomething() throws IOException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         messageSocket.sendInfo(simpleDateFormat.format(new Date()), null);

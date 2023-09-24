@@ -5,7 +5,7 @@ spring:
   application:
     name: springSecurityDemo
   datasource:
-    url: jdbc:mysql://192.168.0.103:3306/wayne?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/wayne?serverTimezone=UTC&useSSL=false
     username: wayne
     password: djw131939AA!
     driver-class-name: com.mysql.cj.jdbc.Driver

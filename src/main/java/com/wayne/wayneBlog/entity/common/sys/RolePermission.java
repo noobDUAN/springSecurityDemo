@@ -1,4 +1,4 @@
-package com.wayne.wayneBlog.entity.common;
+package com.wayne.wayneBlog.entity.common.sys;
 
 
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.wayne.wayneBlog.entity.common;
+package com.wayne.wayneBlog.entity.common.sys;
 
 
 import jakarta.persistence.Entity;
@@ -8,13 +8,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "user_role")
-public class UserRole {
+@Table(name = "permission")
+public class Permission {
 
     @Id
     private long id;
-    private long userId;
-    private long roleId;
+    private long parentId;
+    private String code;
+    private String name;
+    private String intro;
+    private long category;
+    private long uri;
     private java.sql.Timestamp created;
     private String creator;
     private java.sql.Timestamp edited;
@@ -31,21 +35,57 @@ public class UserRole {
     }
 
 
-    public long getUserId() {
-        return userId;
+    public long getParentId() {
+        return parentId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
     }
 
 
-    public long getRoleId() {
-        return roleId;
+    public String getCode() {
+        return code;
     }
 
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+
+    public long getCategory() {
+        return category;
+    }
+
+    public void setCategory(long category) {
+        this.category = category;
+    }
+
+
+    public long getUri() {
+        return uri;
+    }
+
+    public void setUri(long uri) {
+        this.uri = uri;
     }
 
 
