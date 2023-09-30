@@ -11,8 +11,8 @@
     <groupId>com.wayne</groupId>
     <artifactId>WayneBolg</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springSecurityDemo</name>
-    <description>springSecurityDemo</description>
+    <name>WayneBlog</name>
+    <description>WayneBlog</description>
     <properties>
         <java.version>17</java.version>
     </properties>

@@ -11,6 +11,7 @@
 <input id="text" type="text" />
 <button onclick="send()">发送消息</button>
 <button onclick="noteBookView()">日记</button>
+<a href="/logout">登出</a>
 <hr/>
 <button onclick="closeWebSocket()">关闭WebSocket连接</button>
 <hr/>
@@ -71,12 +72,7 @@
     }
 
     function noteBookView(){
-
-        $.ajax({
-            url: ctx+"/NoteBook",
-            type:"GET",
-
-        })
+        window.open(ctx+"/NoteBook/");
     }
 </script>
 

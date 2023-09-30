@@ -11,11 +11,13 @@ public class SecurityUserDetails implements UserDetails {
 
     private String username;
     private String password;
+    private String salt;
     private HashSet<SimpleGrantedAuthority> authoritySet;
 
-    public SecurityUserDetails(String username, String password, HashSet<SimpleGrantedAuthority> authoritySet) {
+    public SecurityUserDetails(String username, String password, String salt, HashSet<SimpleGrantedAuthority> authoritySet) {
         this.username = username;
         this.password = password;
+        this.salt = salt;
         this.authoritySet = authoritySet;
     }
 
@@ -32,6 +34,10 @@ public class SecurityUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     @Override

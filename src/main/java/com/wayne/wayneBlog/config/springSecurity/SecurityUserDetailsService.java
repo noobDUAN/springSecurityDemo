@@ -1,6 +1,5 @@
 package com.wayne.wayneBlog.config.springSecurity;
 
-import com.wayne.wayneBlog.entity.UserBean;
 import com.wayne.wayneBlog.entity.common.sys.Role;
 import com.wayne.wayneBlog.entity.common.sys.User;
 import com.wayne.wayneBlog.service.common.sys.RoleService;
@@ -11,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import java.util.*;
 
@@ -31,7 +31,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("用户：‘" + username + "'不存在");
         } else {
             HashSet<SimpleGrantedAuthority> authorityHashSet = createAuthorities(userBean.getId());
-            SecurityUserDetails newUser = new SecurityUserDetails(userBean.getName(), userBean.getPassword(), authorityHashSet);
+            SecurityUserDetails newUser = new SecurityUserDetails(userBean.getName(), userBean.getPassword(), userBean.getSalt(), authorityHashSet);
             users.add(newUser);
             return newUser;
         }
