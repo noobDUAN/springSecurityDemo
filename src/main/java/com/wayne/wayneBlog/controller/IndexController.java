@@ -1,5 +1,6 @@
 package com.wayne.wayneBlog.controller;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,5 +24,14 @@ public class IndexController {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         return "Hello, " + authentication.getName() + "!";
+    }
+
+    @GetMapping("/bye")
+    @ResponseBody
+    @Async
+    public String bye() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        return "bye, " + authentication.getName() + "!";
     }
 }
